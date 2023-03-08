@@ -18,4 +18,4 @@ Currently, I am helping [LabTwin GmbH](https://www.labtwin.com/) build a voice a
 
 My other research interests include multimodal representation learning and knowledge graphs.
 
-I am also an archivist who is doing their part to combat [link rot](https://en.wikipedia.org/wiki/Link_rot). 
+I am also a digital archivist who is doing their part to combat [link rot](https://en.wikipedia.org/wiki/Link_rot). 
