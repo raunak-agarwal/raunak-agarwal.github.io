@@ -16,7 +16,7 @@ I am a ML practitioner interested in its applications in natural language proces
 
 Currently, I am working on vision-language and self-supervised models for chest x-rays at [Fraunhofer HHI](https://www.hhi.fraunhofer.de/en/index.html). Prior to this, I helped [LabTwin GmbH](https://www.labtwin.com/) build a voice assistant for the life sciences domain. 
 
-Additionaly, I have also worked with Prof. Manfred Stede at the [Applied CL Discourse Research Lab](http://angcl.ling.uni-potsdam.de/) on argumentation mining and climate change discourse.
+Additionally, I have also worked with Prof. Manfred Stede at the [Applied CL Discourse Research Lab](http://angcl.ling.uni-potsdam.de/) on argumentation mining and climate change discourse.
 
 My other research interests include multimodal representation learning and knowledge graphs.
 
