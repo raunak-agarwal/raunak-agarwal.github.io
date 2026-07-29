@@ -1,0 +1,22 @@
+---
+layout: default
+title: Posts
+nav: posts
+permalink: /posts/
+---
+<section class="posts-section">
+  <p class="site-desc">Posts about machine learning, data, and engineering.</p>
+  <ul class="post-list">
+    {% for post in site.posts %}
+    <li class="post-item">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %b %Y" }}</time>
+      <div class="post-item-content">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% if post.subtitle %}
+        <span class="post-item-subtitle">{{ post.subtitle }}</span>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

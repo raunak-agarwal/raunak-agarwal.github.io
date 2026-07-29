@@ -1,0 +1,35 @@
+title: Raunak Agarwal
+description: Researcher and engineer interested in data-centric and user-centric machine learning.
+url: "https://raunak-agarwal.github.io"
+baseurl: ""
+lang: en
+timezone: Europe/Berlin
+
+author:
+  name: Raunak Agarwal
+
+markdown: kramdown
+permalink: /:title/
+
+plugins:
+  - jekyll-feed
+
+feed:
+  posts_limit: 20
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      nav: posts
+
+# Setting exclude replaces Jekyll's defaults, so the Ruby files have to be
+# listed here too or they end up served as part of the site
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .claude/

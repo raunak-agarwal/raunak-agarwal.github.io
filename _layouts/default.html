@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <!-- Resolve theme before first paint so there is no light/dark flash -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) { /* storage blocked */ }
+      var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', saved || system);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" href="{{ '/favicon.png' | relative_url }}">
+  <!-- Browsers request /favicon.ico regardless of the tag above; serving one
+       keeps 404s out of the log (and covers clients that ignore the PNG) -->
+  <link rel="icon" type="image/x-icon" sizes="any" href="{{ '/favicon.ico' | relative_url }}">
+
+  <!-- Fonts -->
+  <link rel="preload" href="{{ '/assets/fonts/DepartureMono-Regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@300..700&display=swap">
+
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <title>{{ site.title }} | {{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="author" content="{{ site.author.name }}">
+  <meta property="og:title" content="{% if page.url == '/' %}{{ site.title }}{% else %}{{ page.title | default: site.title }}{% endif %}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {% feed_meta %}
+</head>
+<body class="{% if page.layout == 'post' %}reading-page{% else %}overview-page{% endif %}">
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <div class="page-column">
+    <main class="site-main">
+      <div class="container">
+        <header class="home-header">
+          <div class="header-row">
+            {% if page.layout == 'post' %}
+            <div class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
+            {% else %}
+            <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+            {% endif %}
+            <div class="header-controls">
+              <nav class="header-nav" aria-label="Site navigation">
+                <a href="{{ '/' | relative_url }}" class="header-nav-link{% if page.nav == 'home' %} header-nav-active{% endif %}">
+                  <span class="header-nav-index">01</span>
+                  <span class="header-nav-label">Home</span>
+                </a>
+                <a href="{{ '/posts/' | relative_url }}" class="header-nav-link{% if page.nav == 'posts' %} header-nav-active{% endif %}">
+                  <span class="header-nav-index">02</span>
+                  <span class="header-nav-label">Posts</span>
+                </a>
+                <a href="{{ '/publications/' | relative_url }}" class="header-nav-link{% if page.nav == 'publications' %} header-nav-active{% endif %}">
+                  <span class="header-nav-index">03</span>
+                  <span class="header-nav-label">Publications</span>
+                </a>
+              </nav>
+              <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                  <span class="toggle-icon" id="toggle-icon">◐</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {{ content }}
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      {% comment %}Banner is for the top-level pages only, not individual posts{% endcomment %}
+      {% unless page.layout == "post" %}
+      <div class="hero-wrap">
+        <div class="hero-banner"{% if page.url == "/" %} data-animate="true"{% endif %} aria-hidden="true">
+          <picture>
+            <source srcset="{{ '/assets/img/banner-still-light.webp' | relative_url }}" media="(prefers-color-scheme: light)">
+            <img id="banner-still" src="{{ '/assets/img/banner-still-dark.webp' | relative_url }}"
+                 data-src-dark="{{ '/assets/img/banner-still-dark.webp' | relative_url }}"
+                 data-src-light="{{ '/assets/img/banner-still-light.webp' | relative_url }}"
+                 alt="" width="960" height="458" loading="eager">
+          </picture>
+          <video id="banner-video"
+                 data-src-dark="{{ '/assets/img/banner-seq-dark.mp4' | relative_url }}"
+                 data-src-light="{{ '/assets/img/banner-seq-light.mp4' | relative_url }}"
+                 muted playsinline preload="auto" disablepictureinpicture></video>
+        </div>
+        <button id="banner-reload" class="banner-reload" type="button" hidden aria-label="Replay banner animation">reload</button>
+      </div>
+      {% endunless %}
+      <div class="footer-divider"></div>
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/raunak-agarwal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="dot">·</span>
+          <a href="https://github.com/raunak-agarwal" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="dot">·</span>
+          <a href="https://scholar.google.com/citations?user=ujs2lGwAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+</body>
+</html>
