@@ -26,7 +26,7 @@ image: /assets/img/og-card.png
 
 # Paste the token from the "HTML tag" verification method in Google Search
 # Console / Bing Webmaster Tools; the layout emits the meta tag when set.
-google_site_verification:
+google_site_verification: oaBadi1S6SXVgYUhFBTUDhUyPj6K8pf0Vf3NcRswYNE
 bing_site_verification:
 
 markdown: kramdown
