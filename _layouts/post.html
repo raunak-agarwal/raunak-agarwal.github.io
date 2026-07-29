@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="post-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
+    <div class="post-meta">
+      <div class="post-meta-text">
+        <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+        {% assign words = content | strip_html | number_of_words %}
+        {% assign minutes = words | divided_by: 200 | at_least: 1 %}
+        <span class="post-reading-time">· {{ minutes }} min read</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav">
+    <a href="{{ '/posts/' | relative_url }}">← cd /posts</a>
+  </nav>
+</article>
