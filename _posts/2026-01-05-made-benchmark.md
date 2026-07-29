@@ -1,6 +1,19 @@
 ---
-title: "MADE: a living benchmark for medical device adverse events"
+title: "MADE: A Living Benchmark for Multi-Label Text Classification with Uncertainty Quantification of Medical Device Adverse Events"
 subtitle: Multi-label classification where uncertainty quantification counts as much as accuracy.
+description: >-
+  MADE (ACL 2026) is a living benchmark for multi-label classification of FDA
+  medical device adverse event reports, scoring 20+ encoder and decoder LLMs on
+  accuracy and uncertainty quantification together.
+keywords:
+  - multi-label text classification
+  - uncertainty quantification
+  - medical device adverse events
+  - IMDRF codes
+  - FDA MAUDE
+  - large language models
+  - benchmark
+  - ACL 2026
 ---
 
 [MADE](https://aclanthology.org/2026.acl-long.2148/) (ACL 2026) is a benchmark
@@ -9,7 +22,9 @@ domain where model output feeds human review, being right is not enough: the
 model also has to signal when it is likely wrong. MADE scores predictive
 performance and uncertainty quantification side by side.
 
-**The data.** 488,273 reports from the FDA's adverse event database, 2015 to
+## The data: 488k FDA MAUDE reports, 1,154 IMDRF codes
+
+488,273 reports from the FDA's MAUDE adverse event database, 2015 to
 mid-2025, labelled with 1,154 IMDRF codes over three levels and up-propagated to
 parent codes. About 8.79 labels per report, roughly 370 tokens each, with a long
 tail of rare codes. Splits are strictly temporal: 298,825 training reports from
@@ -18,7 +33,9 @@ testing from July 2024 to June 2025. The benchmark is *living*, refreshed
 quarterly, so the test set always post-dates whatever a model saw in
 pretraining.
 
-**The setup.** 20+ encoder and decoder models, three learning paradigms, and six
+## The setup: 20+ models, three paradigms, six uncertainty signals
+
+20+ encoder and decoder models, three learning paradigms, and six
 uncertainty signals, evaluated as one grid.
 
 <figure>
@@ -256,12 +273,16 @@ uncertainty signals, evaluated as one grid.
   illustrative.</figcaption>
 </figure>
 
+## Classification and Uncertainty Quantification Results
+
 Accuracy is macro-F1 and Jaccard, broken out by label frequency, because a
 single average hides how badly models do on rare codes. Uncertainty is scored on
 rejection ranking, per-label correlation, and calibration error.
 
-**Two salient models per paradigm**, with the paradigm median above each
-pair. Hover over the header to know what the metric means.
+Only the two best models per paradigm are shown, with the paradigm median above
+each pair; full results are in the
+[paper](https://aclanthology.org/2026.acl-long.2148/). Hover over a column
+header to see what the metric means.
 
 <table>
   <thead>
@@ -293,7 +314,8 @@ pair. Hover over the header to know what the metric means.
   </tbody>
 </table>
 
-**What we found.** 
+## What we found
+
 - Small discriminatively fine-tuned models give the best head-to-tail accuracy at a fraction of the cost of the large ones. 
 - Generative fine-tuning gives the most dependable uncertainty, with the lowest variance across runs.
 - Reasoning models are the only ones making real progress on the extreme tail, yet their uncertainty ordering collapses to near-random.
@@ -396,6 +418,8 @@ under-confidence leave plenty of room for better uncertainty quantification.
 {% endraw %}
 
 ---
+
+## Links
 
 * Code: [github.com/raunak-agarwal/made-benchmark](https://github.com/raunak-agarwal/made-benchmark)
 * Dataset: [ragarwal/MADE-Multilabel-Benchmark](https://huggingface.co/datasets/ragarwal/MADE-Multilabel-Benchmark)

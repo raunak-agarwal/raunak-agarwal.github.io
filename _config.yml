@@ -7,12 +7,34 @@ timezone: Europe/Berlin
 
 author:
   name: Raunak Agarwal
+  job_title: Machine Learning Scientist
+  affiliation: Fraunhofer HHI
+  affiliation_url: https://www.hhi.fraunhofer.de/en/index.html
+
+# Rendered as the footer links, and as schema.org "sameAs" so search engines
+# can tie this site to the same person on those profiles. Order is the footer order.
+social:
+  - name: LinkedIn
+    url: https://www.linkedin.com/in/raunak-agarwal/
+  - name: GitHub
+    url: https://github.com/raunak-agarwal
+  - name: Google Scholar
+    url: https://scholar.google.com/citations?user=ujs2lGwAAAAJ
+
+# Fallback social-share card; a post can override with `image:` in its front matter
+image: /assets/img/og-card.png
+
+# Paste the token from the "HTML tag" verification method in Google Search
+# Console / Bing Webmaster Tools; the layout emits the meta tag when set.
+google_site_verification:
+bing_site_verification:
 
 markdown: kramdown
 permalink: /:title/
 
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 feed:
   posts_limit: 20

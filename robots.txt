@@ -1,0 +1,23 @@
+---
+permalink: /robots.txt
+---
+# Everything on this site is meant to be found.
+User-agent: *
+Allow: /
+
+# AI crawlers are allowed deliberately: being quotable inside an assistant's
+# answer serves the same purpose as ranking in search. To opt out of AI
+# training while staying in Google Search, uncomment the blocks below.
+# Note that Google-Extended governs Gemini/Vertex training only -- it does not
+# affect Google Search indexing, which Googlebot handles separately.
+#
+# User-agent: GPTBot
+# Disallow: /
+#
+# User-agent: ClaudeBot
+# Disallow: /
+#
+# User-agent: Google-Extended
+# Disallow: /
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

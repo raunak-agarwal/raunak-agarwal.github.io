@@ -1,0 +1,29 @@
+---
+permalink: /llms.txt
+---
+# {{ site.title }}
+
+> {{ site.author.job_title }} at {{ site.author.affiliation }}, Berlin. {{ site.description }} Research and writing on multi-label text classification, uncertainty quantification, evaluation benchmarks, and post-training large language models.
+
+This file follows the llms.txt convention (<https://llmstxt.org>): a short,
+machine-readable index of the site for language models and agents.
+
+## Posts
+{% for post in site.posts %}
+- [{{ post.title }}]({{ post.url | absolute_url }}) ({{ post.date | date: "%Y-%m-%d" }}): {{ post.subtitle }}
+{%- endfor %}
+
+## Publications
+
+- [MADE: A Living Benchmark for Multi-Label Text Classification with Uncertainty Quantification of Medical Device Adverse Events](https://aclanthology.org/2026.acl-long.2148/) (ACL 2026): Agarwal, Wenzel, Baur, Zimmer, Harvey, Ma. 488k FDA adverse event reports, 1,154 IMDRF codes, temporal splits, scored on predictive performance and uncertainty quantification together.
+- [Zero-shot Factual Consistency Evaluation Across Domains](https://arxiv.org/abs/2408.04114) (arXiv:2408.04114, 2024): Agarwal.
+- [Exploring Argument Retrieval for Controversial Questions Using Retrieve and Re-rank Pipelines](https://ceur-ws.org/Vol-2936/paper-206.pdf) (CLEF 2021): Agarwal, Koniaev, Schaefer.
+
+## Optional
+
+- [All posts]({{ '/posts/' | absolute_url }})
+- [All publications]({{ '/publications/' | absolute_url }})
+- [RSS feed]({{ '/feed.xml' | absolute_url }})
+- [Sitemap]({{ '/sitemap.xml' | absolute_url }})
+{% for s in site.social %}- [{{ s.name }}]({{ s.url }})
+{% endfor %}
