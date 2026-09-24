@@ -4,7 +4,7 @@ Personal site. Three tabs: **Home** (bio), **Posts** (blog) and **Publications**
 Jekyll, hosted on
 GitHub Pages. Design: pixel display font ([Departure Mono](https://departuremono.com),
 OFL-licensed, bundled in `assets/fonts/`), dithered background, scanlines,
-dark/light theme toggle, animated dither banner above the footer.
+dark/light theme toggle.
 
 ## What's where
 
@@ -15,11 +15,10 @@ dark/light theme toggle, animated dither banner above the footer.
 | `posts.html` | The `/posts/` listing |
 | `publications.html` | The `/publications/` list, newest first |
 | `_posts/` | One Markdown file per post |
-| `_layouts/default.html` | Page shell: head, header/nav, banner, footer links |
+| `_layouts/default.html` | Page shell: head, header/nav, footer links |
 | `_layouts/post.html` | Individual post page |
 | `assets/css/main.css` | The entire stylesheet — design tokens at the top |
-| `assets/js/theme.js` | Theme toggle, banner playback, code copy buttons |
-| `assets/img/banner-*` | The four banner assets (dark/light × video/still) |
+| `assets/js/theme.js` | Theme toggle, code copy buttons |
 | `assets/img/og-card.png` | 1200×630 social-share card (`og:image`) |
 | `robots.txt`, `llms.txt` | Crawler directives and a machine-readable site index |
 | `404.html`, `favicon.png` | Self-explanatory |
@@ -117,19 +116,6 @@ template expression and swallow the text. The blocks pick up a copy button from
 - Footer links (LinkedIn · GitHub · Google Scholar) and the nav: `_layouts/default.html`.
 - Name shown in the header, and the description used for `<title>`/RSS: `_config.yml`.
 
-**After editing the bio, re-check the one-screen fit.** The landing page is
-tuned to fit a laptop viewport with no scrolling, and the banner is sized to
-claim exactly the height the bio leaves over:
-
-```css
-.hero-wrap { width: min(100%, max(360px, calc(209.6vh - 1178px))); }
-```
-
-That `1178px` encodes the height of header + bio + footer. Add or remove a line
-of bio and the figure needs re-tuning: every 1px of height freed up is worth
-2.096px of figure width (the 480/229 aspect). Check by loading the home page and
-confirming `document.documentElement.scrollHeight === window.innerHeight`.
-
 ### Colours and type
 
 Design tokens are the `:root` / `[data-theme]` blocks at the top of
@@ -156,7 +142,7 @@ Per-page metadata is built in `_layouts/default.html`, not by a plugin:
   stay `Raunak Agarwal | Home`. Search results and tabs both weight the front of
   the string, so a post leads with its own title.
 - **`og:image` / `twitter:image`.** `assets/img/og-card.png`, overridable per
-  page with `image:` in front matter. Regenerate it after a banner swap.
+  page with `image:` in front matter.
 - **JSON-LD.** `Person` on the top-level pages (with `sameAs` pointing at the
   `social:` list in `_config.yml`, which also renders the footer), `BlogPosting`
   on posts. Check changes with Google's
@@ -181,26 +167,3 @@ Two things still to do by hand, once:
 Ranking for a topic follows from the page actually being about it in plain words
 — title, first paragraph, headings. A post that never spells out the phrase
 someone would type will not surface for it no matter what the metadata says.
-
-## The footer banner
-
-On the home page a play-once sequence (`assets/img/banner-seq-{dark,light}.mp4`,
-~8s): a cellular automaton dissolves pixel-by-pixel into the footage, which plays
-through once at quarter speed and rests on its final frame; a small "reload"
-button (bottom right) replays it. Everywhere else — and for
-`prefers-reduced-motion` or no-JS visitors — the banner is just the resting still
-(`banner-still-{dark,light}.webp`). Frames are Bayer-dithered (ordered dithering
-is position-stable, so motion reads as motion rather than shimmer). Dark = white
-dither on black; light = re-dithered with inverted luminance (dark scene → dense
-ink on paper), because a plain CSS inversion of the dark asset looks empty.
-`theme.js` picks the active theme's files, so only those download, and re-syncs
-on toggle; without JavaScript a `<picture>` media query picks the still.
-
-The assets are 960×458. They hold up displayed at up to ~960 CSS px (a ~1.9×
-upscale on a 2× display still reads as clean dither); past that the sequence
-would need re-rendering at a higher resolution.
-
-The repo carries only the four rendered files; the source footage is kept
-outside it (`../personal-site-2026-banner-sources/`) since it is large and not
-ours to redistribute. To swap the banner, replace the four files in
-`assets/img/` — nothing in the markup or JS refers to a specific variant.

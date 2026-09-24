@@ -176,25 +176,6 @@
     </main>
 
     <footer class="site-footer">
-      {% comment %}Banner is for the top-level pages only, not individual posts{% endcomment %}
-      {% unless page.layout == "post" %}
-      <div class="hero-wrap">
-        <div class="hero-banner"{% if page.url == "/" %} data-animate="true"{% endif %} aria-hidden="true">
-          <picture>
-            <source srcset="{{ '/assets/img/banner-still-light.webp' | relative_url }}" media="(prefers-color-scheme: light)">
-            <img id="banner-still" src="{{ '/assets/img/banner-still-dark.webp' | relative_url }}"
-                 data-src-dark="{{ '/assets/img/banner-still-dark.webp' | relative_url }}"
-                 data-src-light="{{ '/assets/img/banner-still-light.webp' | relative_url }}"
-                 alt="" width="960" height="458" loading="eager">
-          </picture>
-          <video id="banner-video"
-                 data-src-dark="{{ '/assets/img/banner-seq-dark.mp4' | relative_url }}"
-                 data-src-light="{{ '/assets/img/banner-seq-light.mp4' | relative_url }}"
-                 muted playsinline preload="auto" disablepictureinpicture></video>
-        </div>
-        <button id="banner-reload" class="banner-reload" type="button" hidden aria-label="Replay banner animation">reload</button>
-      </div>
-      {% endunless %}
       <div class="footer-divider"></div>
       <div class="footer-inner">
         {%- comment -%}
