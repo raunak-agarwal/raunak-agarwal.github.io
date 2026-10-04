@@ -134,7 +134,7 @@
   {%- endif %}
   {% feed_meta %}
 </head>
-<body class="{% if page.layout == 'post' %}reading-page{% else %}overview-page{% endif %}">
+<body class="{% if page.layout == 'post' %}reading-page{% else %}overview-page{% endif %}{% if page.nav == 'home' %} home-page{% endif %}">
   <div class="scanlines" aria-hidden="true"></div>
 
   <div class="page-column">
@@ -188,5 +188,8 @@
   </div>
 
   <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+  {% if page.nav == 'home' %}
+  <script src="{{ '/assets/js/growth.js' | relative_url }}" defer></script>
+  {% endif %}
 </body>
 </html>

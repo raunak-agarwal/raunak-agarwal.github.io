@@ -31,3 +31,23 @@ description: >-
     uncertainty quantification, and reliable machine learning systems.
   </p>
 </section>
+
+<div class="growth-art" id="growth-art">
+  <canvas id="growth-canvas" role="button" tabindex="0" aria-label="Growing network. Click or tap to grow a new branch, or press Enter to grow from the center."></canvas>
+  <span class="growth-hint" aria-hidden="true">click to grow · hover to trace</span>
+  <div class="growth-controls" id="growth-controls" hidden>
+    <select class="growth-speed" id="growth-speed" aria-label="Animation speed" title="Animation speed">
+      <option value="0.5">0.5×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.5">1.5×</option>
+      <option value="2">2×</option>
+      <option value="3">3×</option>
+    </select>
+    <button class="growth-toggle" id="growth-reset" type="button" aria-label="Restart growth" title="Restart growth">
+      <span aria-hidden="true">↺</span>
+    </button>
+    <button class="growth-toggle" id="growth-toggle" type="button" aria-label="Pause animation">
+      <span aria-hidden="true">Ⅱ</span>
+    </button>
+  </div>
+</div>

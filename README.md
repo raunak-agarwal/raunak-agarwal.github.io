@@ -19,6 +19,7 @@ dark/light theme toggle.
 | `_layouts/post.html` | Individual post page |
 | `assets/css/main.css` | The entire stylesheet — design tokens at the top |
 | `assets/js/theme.js` | Theme toggle, code copy buttons |
+| `assets/js/growth.js` | Home-page branching canvas animation, playback and motion preferences |
 | `assets/img/og-card.png` | 1200×630 social-share card (`og:image`) |
 | `robots.txt`, `llms.txt` | Crawler directives and a machine-readable site index |
 | `404.html`, `favicon.png` | Self-explanatory |
@@ -122,6 +123,32 @@ Design tokens are the `:root` / `[data-theme]` blocks at the top of
 `assets/css/main.css` — font stacks, the type scale, the column width, and both
 palettes. Light-mode link colour is set for WCAG AA contrast; if you change it,
 keep the ratio ≥ 4.5:1.
+
+The home page fills the space below the bio with an original canvas animation
+inspired by the subdividing rounded squares on [Recursive](https://www.recursive.com/).
+The artwork extends into both page margins, while the bio keeps its original
+reading width. The desktop grid uses 64px cells with two subdivisions (32px and
+16px), with the reference's smaller base sizes on tablet and mobile.
+It starts from a central seed and spreads outward in all directions, creating
+new forks as neighboring cells become occupied. Rounded squares expand from
+the edge or corner nearest their parent, with bright growing tips
+that settle into muted blue in light mode and muted green in dark mode.
+Growing tips use pale shades of the same color. Hover highlights use soft steel
+blue in light mode and the green accent in dark mode. Switching themes recolors
+the existing tree in place.
+At the default 1× speed, new generations begin every
+2 seconds and tiles expand over 2 seconds, matching Recursive's header timing.
+The completed structure stays until manually reset. New
+cells brighten as they appear; highlights stay inside the tiles, without outer halos.
+Its colours and minimum height are in the `Home: recursive growth` section of
+`assets/css/main.css`; its geometry and timing are in `assets/js/growth.js`.
+It loads only on Home, uses no libraries or remote assets, pauses when hidden or
+offscreen, and starts as a still image when reduced motion is requested. The
+small lower-right controls let visitors pause, restart, or select a speed from 0.5× to 3×.
+Click or tap a grid cell to add a new growth seed without clearing the existing
+branches. Hover a cell to trace its descendants in the theme's accent, with a short
+outward cascade and a smooth fade when the pointer leaves. Keyboard users can
+focus the canvas and press Enter or Space to add a seed at its center.
 
 ## Search and crawlers
 
