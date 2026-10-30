@@ -20,14 +20,14 @@
   --font-mono: "Geist Mono", "SF Mono", "Cascadia Mono", "Fira Code", monospace;
 
   --fs-xs: 12px;
-  --fs-sm: 14px;
-  --fs-base: 15px;
-  --fs-lg: 19px;
+  --fs-sm: 15px;
+  --fs-base: 17px;
+  --fs-lg: 21px;
   --fs-xl: 24px;
-  --fs-2xl: clamp(26px, 2.8vw, 40px);
+  --fs-2xl: clamp(30px, 3vw, 42px);
 
-  --content-width: 68vw;
-  --content-max: 960px;
+  --content-width: calc(100% - 4rem);
+  --content-max: 900px;
   --edge-fade: 80px;
   --transition: 150ms ease;
 
@@ -122,7 +122,7 @@ html {
   font-size: var(--fs-base);
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges;
 }
 
 body {
@@ -376,10 +376,12 @@ body {
 .about-section {
   display: flex;
   flex-direction: column;
-  max-width: 84ch;
+  width: 100%;
+  max-width: 72ch;
+  margin-inline: auto;
   font-family: var(--font-mono);
   font-size: var(--fs-base);
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 .about-section p {
@@ -388,7 +390,7 @@ body {
 }
 
 .about-section p + p {
-  margin-top: 0.9rem;
+  margin-top: 1.1rem;
 }
 
 .about-section .site-desc {
@@ -407,7 +409,7 @@ body {
   color: var(--link-hover);
 }
 
-/* ---- Home: recursive growth ---- */
+/* ---- Home: ocean ---- */
 
 .home-page .site-main,
 .home-page .site-main > .container {
@@ -416,107 +418,102 @@ body {
   flex: 1;
 }
 
-.growth-art {
+.home-page .header-row {
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.home-page .site-title {
+  margin-right: 0;
+  text-align: center;
+}
+
+.home-page .header-controls {
+  justify-content: center;
+}
+
+.home-page .home-header {
+  margin-bottom: 2rem;
+}
+
+.water-art {
+  --water-shadow: #111410;
+  --water-light: #d0d8c8;
+  --water-glow: #b7dfad;
   position: relative;
   flex: 1;
   align-self: center;
   width: calc(100vw - 3rem);
-  min-height: 260px;
-  margin-top: clamp(1.5rem, 4vh, 3.5rem);
-  isolation: isolate;
-  --growth-node: #6a9465;
-  --growth-line: #a3b99b;
-  --growth-signal: #dff4d9;
-  --growth-highlight: var(--accent);
-  --growth-core: #c0f4b9;
+  min-height: clamp(300px, 38vh, 460px);
+  margin-top: 1.75rem;
+  overflow: hidden;
+  /* A quiet horizon remains if WebGL is unavailable. */
+  background: linear-gradient(to bottom, transparent 10%, var(--border) 48%, var(--bg) 100%);
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 85%, transparent),
+    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-composite: intersect;
 }
 
-[data-theme="light"] .growth-art {
-  --growth-node: #7d95cb;
-  --growth-line: #6b81af;
-  --growth-signal: #dbe6ff;
-  --growth-highlight: #9cafd1;
-  --growth-core: #b9ceff;
+[data-theme="light"] .water-art {
+  --water-shadow: #a29b8d;
+  --water-light: #f0ece4;
 }
 
-.growth-art::before {
-  content: "";
-  position: absolute;
-  inset: 0 -12px;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(ellipse at center, #090f08 15%, transparent 75%);
-}
-
-[data-theme="light"] .growth-art::before {
-  background: none;
-}
-
-.growth-art canvas {
+.water-art canvas {
   position: absolute;
   inset: 0;
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.water-art canvas[hidden] {
+  display: none;
+}
+
+.water-art canvas[role="button"] {
   cursor: crosshair;
-  mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 91%, transparent),
-    linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
-  mask-composite: intersect;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
-.growth-art:has(canvas:focus-visible) {
-  outline: 1px dashed var(--accent);
-  outline-offset: 4px;
+.water-pressing canvas[role="button"] {
+  cursor: grabbing;
 }
 
-.growth-hint {
+.water-art:has(canvas:focus-visible)::after {
+  content: "";
   position: absolute;
-  bottom: 0.85rem;
-  left: 0;
+  inset: 24% 8% 18%;
+  border: 1px dashed var(--accent);
   pointer-events: none;
-  color: var(--fg-2);
-  font: 11px var(--font-mono);
 }
 
-.growth-controls {
+.water-toggle {
   position: absolute;
-  right: 0;
-  bottom: 0.4rem;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.growth-controls[hidden] { display: none; }
-
-.growth-toggle,
-.growth-speed {
-  width: 30px;
-  height: 30px;
-  border: 1px solid transparent;
+  right: 8%;
+  bottom: 12%;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--border);
   background: var(--bg);
   color: var(--fg-2);
   cursor: pointer;
   font: 12px var(--font-mono);
-  transition: color var(--transition), border-color var(--transition);
 }
 
-.growth-speed {
-  width: auto;
-  padding: 0 3px;
-  border-radius: 0;
-}
-
-.growth-toggle:hover,
-.growth-toggle:focus-visible,
-.growth-speed:hover,
-.growth-speed:focus-visible {
+.water-toggle:hover,
+.water-toggle:focus-visible {
   color: var(--accent);
   border-color: var(--accent);
 }
 
 @media (max-width: 768px) {
-  .growth-art { width: calc(100vw - 2.5rem); min-height: 240px; margin-top: 1.5rem; }
+  .water-art {
+    width: calc(100vw - 2.5rem);
+    min-height: 280px;
+    margin-top: 1.25rem;
+  }
 }
 
 /* ---- Posts list ---- */
@@ -722,8 +719,8 @@ body {
 }
 
 .post-body {
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.7;
   overflow-wrap: break-word;
   font-weight: 450;
 }
@@ -1251,8 +1248,8 @@ a[target="_blank"]:hover::after {
 
 @media (max-width: 768px) {
   :root {
-    --content-width: 100vw;
-    --content-max: 100vw;
+    --content-width: 100%;
+    --content-max: 100%;
     --edge-fade: 0px;
   }
 
@@ -1273,6 +1270,16 @@ a[target="_blank"]:hover::after {
     justify-content: flex-start;
     width: max-content;
     max-width: 100%;
+  }
+
+  .header-nav-link,
+  .theme-toggle,
+  .water-toggle {
+    min-height: 44px;
+  }
+
+  .header-nav-link {
+    align-items: center;
   }
 
   .post-item {
@@ -1308,6 +1315,15 @@ a[target="_blank"]:hover::after {
 }
 
 @media (max-width: 430px) {
+  .pub-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .pub-year {
+    width: auto;
+  }
+
   .header-controls {
     display: inline-grid;
     grid-template-columns: repeat(2, 1fr);
