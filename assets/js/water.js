@@ -462,6 +462,9 @@
   }
   canvas.addEventListener('pointerdown', function (event) {
     if (!event.isPrimary || event.button !== 0 || gesture) return;
+    // Some browsers retain :focus-visible when focus is set from a pointer.
+    // Keep the focus cue for keyboard input, without framing mouse/touch ripples.
+    canvas.classList.add('water-pointer-focus');
     const bounds = canvas.getBoundingClientRect();
     if (!bounds.width || !bounds.height || !waterHit((event.clientX - bounds.left) / bounds.width,
       (event.clientY - bounds.top) / bounds.height)) return;
@@ -502,6 +505,7 @@
     if (event.detail === 0) addRipple(0.5, 0.75);
   });
   canvas.addEventListener('keydown', function (event) {
+    canvas.classList.remove('water-pointer-focus');
     if (event.key !== 'Enter' && event.key !== ' ') return;
     event.preventDefault();
     if (event.repeat) return;
@@ -513,7 +517,10 @@
     addRipple(0.5, 0.75, releaseStrength(keyboardHold.started));
     clearGesture();
   });
-  canvas.addEventListener('blur', clearGesture);
+  canvas.addEventListener('blur', function () {
+    canvas.classList.remove('water-pointer-focus');
+    clearGesture();
+  });
   window.addEventListener('blur', clearGesture);
   toggle.addEventListener('click', function () { paused = !paused; syncPlayback(); });
   motion.addEventListener('change', function () { paused = motion.matches; syncPlayback(); });

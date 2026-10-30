@@ -482,7 +482,11 @@ body {
   cursor: grabbing;
 }
 
-.water-art:has(canvas:focus-visible)::after {
+.water-art canvas.water-pointer-focus {
+  outline: none;
+}
+
+.water-art:has(canvas:focus-visible:not(.water-pointer-focus))::after {
   content: "";
   position: absolute;
   inset: 24% 8% 18%;
